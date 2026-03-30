@@ -36,7 +36,7 @@ const genAI = import.meta.env.VITE_GEMINI_KEY
   ? new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY)
   : null
 
-const MODEL_LIST = ['gemini-2.5-flash', 'gemini-flash-latest', 'gemini-2.0-flash', 'gemma-3-4b-it']
+const MODEL_LIST = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemma-3-4b-it', 'gemini-2.0-flash']
 const GEN_CONFIG = { maxOutputTokens: 300, temperature: 0.7 }
 
 function createChat(modelName) {
