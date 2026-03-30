@@ -36,17 +36,22 @@ const genAI = import.meta.env.VITE_GEMINI_KEY
   ? new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY)
   : null
 
-const MODEL_LIST = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemma-3-4b-it', 'gemini-2.0-flash']
+const MODEL_LIST = ['gemma-3-4b-it', 'gemma-3n-e4b-it', 'gemini-flash-latest', 'gemini-2.5-flash']
 const GEN_CONFIG = { maxOutputTokens: 300, temperature: 0.7 }
 
 function createChat(modelName) {
   if (!genAI) return null
+  const isGemma = modelName.startsWith('gemma')
   const m = genAI.getGenerativeModel({
     model: modelName,
-    systemInstruction: SYSTEM_INSTRUCTION,
+    ...(!isGemma && { systemInstruction: SYSTEM_INSTRUCTION }),
     generationConfig: GEN_CONFIG,
   })
-  return m.startChat({ history: [] })
+  const history = isGemma ? [
+    { role: 'user', parts: [{ text: 'System: ' + SYSTEM_INSTRUCTION }] },
+    { role: 'model', parts: [{ text: 'Understood. I am Sameh Abdel Aal\'s AI sales assistant. I will follow all the rules.' }] },
+  ] : []
+  return m.startChat({ history })
 }
 
 // Make URLs clickable in messages
