@@ -1,0 +1,48 @@
+/* Dark theme (default) */
+:root, .dark {
+  --surface: #131315;
+  --surface-container: #1f1f21;
+  --surface-container-low: #1b1b1d;
+  --surface-container-high: #2a2a2c;
+  --surface-container-highest: #353437;
+  --surface-container-lowest: #0e0e10;
+  --on-surface: #e4e2e4;
+  --on-surface-variant: #c2c6d6;
+  --primary: #adc6ff;
+  --primary-container: #4d8eff;
+  --on-primary: #002e6a;
+  --on-primary-container: #00285d;
+  --secondary: #ddb8ff;
+  --tertiary: #4edea3;
+  --outline: #8c909f;
+  --outline-variant: #424754;
+}
+
+/* Light theme */
+.light {
+  --surface: #fdfbff;
+  --surface-container: #f0eef2;
+  --surface-container-low: #f6f4f8;
+  --surface-container-high: #eae8ec;
+  --surface-container-highest: #e4e2e6;
+  --surface-container-lowest: #ffffff;
+  --on-surface: #1b1b1f;
+  --on-surface-variant: #44474f;
+  --primary: #005ac2;
+  --primary-container: #d8e2ff;
+  --on-primary: #ffffff;
+  --on-primary-container: #001a42;
+  --secondary: #7c03d3;
+  --tertiary: #006c45;
+  --outline: #74777f;
+  --outline-variant: #c4c6d0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
