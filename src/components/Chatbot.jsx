@@ -37,7 +37,7 @@ const genAI = import.meta.env.VITE_GEMINI_KEY
   : null
 
 const model = genAI?.getGenerativeModel({
-  model: 'gemini-2.5-flash',
+  model: 'gemini-flash-latest',
   systemInstruction: SYSTEM_INSTRUCTION,
   generationConfig: {
     maxOutputTokens: 300,
