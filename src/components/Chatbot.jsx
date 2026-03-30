@@ -19,8 +19,10 @@ SAMEH'S PROFILE:
 - Works at: Taqat Techno (Qatar, full-time) + TechRise (UAE, part-time)
 - Projects: relief-center.odoo.com, taqatprop.com, aldalilmc.com, pearlpixels.com, taqat.qa
 - Contact: samehashraf9472@gmail.com | WhatsApp: wa.me/201017729427
+- CV: https://sameh-xi.vercel.app/sameh-cv.pdf
 
 RULES:
+- If user asks for CV/resume: give the link https://sameh-xi.vercel.app/sameh-cv.pdf
 - Always mention a real project when discussing services
 - For pricing: "Sameh offers custom quotes — message him on WhatsApp"
 - Off-topic questions: "I'm Sameh's assistant, here to help with his Odoo & web services! 😊"
@@ -32,7 +34,7 @@ const genAI = import.meta.env.VITE_GEMINI_KEY
   : null
 
 const model = genAI?.getGenerativeModel({
-  model: 'gemini-flash-latest',
+  model: 'gemini-2.5-flash',
   systemInstruction: SYSTEM_INSTRUCTION,
   generationConfig: {
     maxOutputTokens: 300,
