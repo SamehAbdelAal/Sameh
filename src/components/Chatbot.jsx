@@ -31,19 +31,23 @@ RULES:
 - Off-topic questions: "I'm Sameh's assistant, here to help with his Odoo & web services! 😊"
 - Greetings: Welcome them and ask how you can help with Sameh's services`
 
-// Initialize Gemini
+// Initialize Gemini with fallback models
 const genAI = import.meta.env.VITE_GEMINI_KEY
   ? new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_KEY)
   : null
 
-const model = genAI?.getGenerativeModel({
-  model: 'gemini-flash-latest',
-  systemInstruction: SYSTEM_INSTRUCTION,
-  generationConfig: {
-    maxOutputTokens: 300,
-    temperature: 0.7,
-  },
-})
+const MODEL_LIST = ['gemini-2.5-flash', 'gemini-flash-latest', 'gemini-2.0-flash', 'gemma-3-4b-it']
+const GEN_CONFIG = { maxOutputTokens: 300, temperature: 0.7 }
+
+function createChat(modelName) {
+  if (!genAI) return null
+  const m = genAI.getGenerativeModel({
+    model: modelName,
+    systemInstruction: SYSTEM_INSTRUCTION,
+    generationConfig: GEN_CONFIG,
+  })
+  return m.startChat({ history: [] })
+}
 
 // Make URLs clickable in messages
 function renderMessage(text) {
@@ -70,6 +74,7 @@ export default function Chatbot() {
   const [loading, setLoading] = useState(false)
   const messagesEndRef = useRef(null)
   const chatRef = useRef(null)
+  const modelIndexRef = useRef(0)
 
   // Show greeting bubble after 4s
   useEffect(() => {
@@ -81,10 +86,10 @@ export default function Chatbot() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, loading])
 
-  // Initialize chat session with history
+  // Initialize chat with first model
   useEffect(() => {
-    if (model && !chatRef.current) {
-      chatRef.current = model.startChat({ history: [] })
+    if (genAI && !chatRef.current) {
+      chatRef.current = createChat(MODEL_LIST[0])
     }
   }, [])
 
@@ -95,36 +100,46 @@ export default function Chatbot() {
     setMessages((prev) => [...prev, { role: 'user', text: userMsg }])
     setLoading(true)
 
-    try {
-      if (chatRef.current) {
-        // Streaming — show text as it arrives
+    // Try each model until one works
+    for (let attempt = 0; attempt < MODEL_LIST.length; attempt++) {
+      try {
+        if (!chatRef.current) {
+          chatRef.current = createChat(MODEL_LIST[modelIndexRef.current])
+        }
+        if (!chatRef.current) {
+          setMessages((prev) => [...prev, { role: 'bot', text: t('chatReply') }])
+          setLoading(false)
+          return
+        }
+
         const result = await chatRef.current.sendMessageStream(userMsg)
         setLoading(false)
         setMessages((prev) => [...prev, { role: 'bot', text: '' }])
         let fullText = ''
         for await (const chunk of result.stream) {
-          const text = chunk.text()
-          fullText += text
+          fullText += chunk.text()
           setMessages((prev) => {
             const updated = [...prev]
             updated[updated.length - 1] = { role: 'bot', text: fullText }
             return updated
           })
         }
-      } else {
-        console.warn('Gemini not initialized. VITE_GEMINI_KEY:', import.meta.env.VITE_GEMINI_KEY ? 'set' : 'missing')
-        setMessages((prev) => [...prev, { role: 'bot', text: t('chatReply') }])
+        return // success — exit loop
+
+      } catch (err) {
+        const is429 = err?.message?.includes('429') || err?.message?.includes('quota')
+        if (is429 && attempt < MODEL_LIST.length - 1) {
+          // Switch to next model and retry
+          modelIndexRef.current = (modelIndexRef.current + 1) % MODEL_LIST.length
+          chatRef.current = createChat(MODEL_LIST[modelIndexRef.current])
+          console.log('Switching to model:', MODEL_LIST[modelIndexRef.current])
+          continue
+        }
+        // All models failed
+        setMessages((prev) => [...prev, { role: 'bot', text: 'Sorry, all models are busy. Contact Sameh directly: https://wa.me/201017729427' }])
         setLoading(false)
+        return
       }
-    } catch (err) {
-      console.error('Gemini error:', err)
-      const errMsg = err?.message || ''
-      if (errMsg.includes('429') || errMsg.includes('quota')) {
-        setMessages((prev) => [...prev, { role: 'bot', text: 'I\'m getting too many requests right now. Please try again in a few seconds!' }])
-      } else {
-        setMessages((prev) => [...prev, { role: 'bot', text: 'Sorry, something went wrong. You can reach Sameh directly at samehashraf9472@gmail.com' }])
-      }
-      setLoading(false)
     }
   }
 
