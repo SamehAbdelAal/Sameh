@@ -44,16 +44,30 @@ export default function Chatbot() {
   const { t } = useI18n()
   const [isOpen, setIsOpen] = useState(false)
   const [showGreeting, setShowGreeting] = useState(false)
+  const [hasAutoOpened, setHasAutoOpened] = useState(false)
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const messagesEndRef = useRef(null)
   const chatRef = useRef(null)
 
+  // Step 1: Show greeting bubble after 4s
   useEffect(() => {
-    const timer = setTimeout(() => setShowGreeting(true), 3000)
-    return () => clearTimeout(timer)
+    const t1 = setTimeout(() => setShowGreeting(true), 4000)
+    return () => clearTimeout(t1)
   }, [])
+
+  // Step 2: Auto-open chat after 7s (only once)
+  useEffect(() => {
+    const t2 = setTimeout(() => {
+      if (!hasAutoOpened) {
+        setIsOpen(true)
+        setShowGreeting(false)
+        setHasAutoOpened(true)
+      }
+    }, 7000)
+    return () => clearTimeout(t2)
+  }, [hasAutoOpened])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -110,10 +124,26 @@ export default function Chatbot() {
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9000]">
       <AnimatePresence>
         {showGreeting && !isOpen && (
-          <motion.div className="absolute bottom-20 right-0 bg-slate-900 text-white p-4 rounded-2xl rounded-br-sm shadow-2xl w-72 border border-white/10"
-            initial={{ opacity: 0, y: 10, scale: 0.9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.9 }}>
-            <p className="text-sm leading-relaxed">{t('chatGreeting')}</p>
-            <button onClick={() => setShowGreeting(false)} className="absolute top-2 right-2 text-white/40 hover:text-white/80 transition-colors">
+          <motion.div className="absolute bottom-20 right-0 bg-slate-900/95 backdrop-blur-xl text-white p-5 rounded-2xl rounded-br-sm shadow-2xl w-80 border border-blue-500/20"
+            initial={{ opacity: 0, y: 20, scale: 0.8 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.9 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 300 }}>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                <span className="material-symbols-outlined text-white text-sm">smart_toy</span>
+              </div>
+              <div>
+                <p className="text-xs font-bold text-white">Sameh AI Assistant</p>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="text-[0.6rem] text-emerald-400">Online now</span>
+                </div>
+              </div>
+            </div>
+            <p className="text-sm leading-relaxed text-white/90">{t('chatGreeting')}</p>
+            <button onClick={() => { setShowGreeting(false); setIsOpen(true); setHasAutoOpened(true) }} className="mt-3 w-full py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors">
+              {lang === 'ar' ? 'ابدأ محادثة' : 'Start Chat'}
+            </button>
+            <button onClick={() => setShowGreeting(false)} className="absolute top-3 right-3 text-white/30 hover:text-white/70 transition-colors">
               <X className="w-3.5 h-3.5" />
             </button>
           </motion.div>
@@ -179,11 +209,20 @@ export default function Chatbot() {
         )}
       </AnimatePresence>
 
-      <motion.button onClick={() => { setIsOpen(!isOpen); setShowGreeting(false) }}
-        className="w-14 h-14 bg-blue-600 hover:bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-600/25 transition-colors"
-        whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} aria-label="Open chat">
-        <span className="material-symbols-outlined text-white text-2xl">{isOpen ? 'close' : 'chat'}</span>
-      </motion.button>
+      <div className="relative">
+        {/* Pulse ring when not open */}
+        {!isOpen && (
+          <span className="absolute inset-0 rounded-full bg-blue-500 animate-ping opacity-20"></span>
+        )}
+        <motion.button onClick={() => { setIsOpen(!isOpen); setShowGreeting(false); setHasAutoOpened(true) }}
+          className="relative w-14 h-14 bg-blue-600 hover:bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-600/30 transition-colors"
+          whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} aria-label="Open chat"
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ delay: 3.5, type: 'spring', stiffness: 260, damping: 20 }}>
+          <span className="material-symbols-outlined text-white text-2xl">{isOpen ? 'close' : 'smart_toy'}</span>
+        </motion.button>
+      </div>
     </div>
   )
 }
