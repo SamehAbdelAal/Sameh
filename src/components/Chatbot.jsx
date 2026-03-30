@@ -41,7 +41,7 @@ const model = genAI?.getGenerativeModel({
 })
 
 export default function Chatbot() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const [isOpen, setIsOpen] = useState(false)
   const [showGreeting, setShowGreeting] = useState(false)
   const [hasAutoOpened, setHasAutoOpened] = useState(false)
