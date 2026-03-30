@@ -44,30 +44,17 @@ export default function Chatbot() {
   const { t, lang } = useI18n()
   const [isOpen, setIsOpen] = useState(false)
   const [showGreeting, setShowGreeting] = useState(false)
-  const [hasAutoOpened, setHasAutoOpened] = useState(false)
   const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const messagesEndRef = useRef(null)
   const chatRef = useRef(null)
 
-  // Step 1: Show greeting bubble after 4s
+  // Show greeting bubble after 4s
   useEffect(() => {
-    const t1 = setTimeout(() => setShowGreeting(true), 4000)
-    return () => clearTimeout(t1)
+    const timer = setTimeout(() => setShowGreeting(true), 4000)
+    return () => clearTimeout(timer)
   }, [])
-
-  // Step 2: Auto-open chat after 7s (only once)
-  useEffect(() => {
-    const t2 = setTimeout(() => {
-      if (!hasAutoOpened) {
-        setIsOpen(true)
-        setShowGreeting(false)
-        setHasAutoOpened(true)
-      }
-    }, 7000)
-    return () => clearTimeout(t2)
-  }, [hasAutoOpened])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -140,7 +127,7 @@ export default function Chatbot() {
               </div>
             </div>
             <p className="text-sm leading-relaxed text-white/90">{t('chatGreeting')}</p>
-            <button onClick={() => { setShowGreeting(false); setIsOpen(true); setHasAutoOpened(true) }} className="mt-3 w-full py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors">
+            <button onClick={() => { setShowGreeting(false); setIsOpen(true);  }} className="mt-3 w-full py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors">
               {lang === 'ar' ? 'ابدأ محادثة' : 'Start Chat'}
             </button>
             <button onClick={() => setShowGreeting(false)} className="absolute top-3 right-3 text-white/30 hover:text-white/70 transition-colors">
@@ -214,7 +201,7 @@ export default function Chatbot() {
         {!isOpen && (
           <span className="absolute inset-0 rounded-full bg-blue-500 animate-ping opacity-20"></span>
         )}
-        <motion.button onClick={() => { setIsOpen(!isOpen); setShowGreeting(false); setHasAutoOpened(true) }}
+        <motion.button onClick={() => { setIsOpen(!isOpen); setShowGreeting(false);  }}
           className="relative w-14 h-14 bg-blue-600 hover:bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-600/30 transition-colors"
           whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} aria-label="Open chat"
           initial={{ scale: 0, rotate: -180 }}
