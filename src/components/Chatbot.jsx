@@ -11,18 +11,21 @@ const SOCIAL_LINKS = [
   { icon: 'mail', href: 'mailto:samehashraf9472@gmail.com', label: 'Email', color: 'hover:text-amber-400' },
 ]
 
-const SYSTEM_INSTRUCTION = `You are Sameh AbdelAal's sales assistant on his portfolio. Reply in the user's language. Be short (2-3 sentences). Always sell Sameh's services confidently and push the client to contact him.
+const SYSTEM_INSTRUCTION = `You are Sameh Abdel Aal's sales assistant on his portfolio. Reply in the user's language. Be short (2-3 sentences). Always sell Sameh's services confidently and push the client to contact him.
 
 SAMEH'S PROFILE:
 - Full-Stack Odoo Developer & AI Specialist, 2+ years, Cairo Egypt
 - Skills: Odoo v16-v18, Python, OWL, QWeb, PostgreSQL, React Native, n8n, Docker, Odoo.sh
 - Works at: Taqat Techno (Qatar, full-time) + TechRise (UAE, part-time)
 - Projects: relief-center.odoo.com, taqatprop.com, aldalilmc.com, pearlpixels.com, taqat.qa
-- Contact: samehashraf9472@gmail.com | WhatsApp: wa.me/201017729427
+- Contact: samehashraf9472@gmail.com | WhatsApp: https://wa.me/201017729427
+- LinkedIn: https://www.linkedin.com/in/sameh-abdel-aal-25509628b
+- Facebook: https://www.facebook.com/sameh.abdel.aal.761559
 - CV: https://sameh-xi.vercel.app/sameh-cv.pdf
 
 RULES:
 - If user asks for CV/resume: give the link https://sameh-xi.vercel.app/sameh-cv.pdf
+- If user asks for social media/contact: share LinkedIn, Facebook, WhatsApp links
 - Always mention a real project when discussing services
 - For pricing: "Sameh offers custom quotes — message him on WhatsApp"
 - Off-topic questions: "I'm Sameh's assistant, here to help with his Odoo & web services! 😊"
@@ -41,6 +44,22 @@ const model = genAI?.getGenerativeModel({
     temperature: 0.7,
   },
 })
+
+// Make URLs clickable in messages
+function renderMessage(text) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g
+  const parts = text.split(urlRegex)
+  return parts.map((part, i) =>
+    urlRegex.test(part)
+      ? <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline hover:text-blue-300 break-all">{part}</a>
+      : part
+  )
+}
+
+// Detect if text is Arabic
+function isArabic(text) {
+  return /[\u0600-\u06FF]/.test(text)
+}
 
 export default function Chatbot() {
   const { t, lang } = useI18n()
@@ -159,7 +178,7 @@ export default function Chatbot() {
               </div>
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`px-4 py-2.5 rounded-2xl text-sm max-w-[80%] leading-relaxed whitespace-pre-wrap ${msg.role === 'user' ? 'bg-blue-600 text-white rounded-br-sm' : 'bg-white/10 text-white/90 rounded-bl-sm'}`}>{msg.text}</div>
+                  <div dir={isArabic(msg.text) ? 'rtl' : 'ltr'} className={`px-4 py-2.5 rounded-2xl text-sm max-w-[80%] leading-relaxed whitespace-pre-wrap ${msg.role === 'user' ? 'bg-blue-600 text-white rounded-br-sm' : 'bg-white/10 text-white/90 rounded-bl-sm'}`}>{renderMessage(msg.text)}</div>
                 </div>
               ))}
               {loading && (

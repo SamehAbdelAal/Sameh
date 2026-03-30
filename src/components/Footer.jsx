@@ -15,7 +15,7 @@ export default function Footer() {
         </div>
 
         <div className="font-label text-[0.65rem] sm:text-[0.75rem] text-on-surface-variant tracking-wider sm:tracking-widest uppercase text-center">
-          &copy; {new Date().getFullYear()} Sameh AbdelAal. {t('allRights')}
+          &copy; {new Date().getFullYear()} Sameh Abdel Aal. {t('allRights')}
         </div>
 
         <div className="flex items-center gap-4 sm:gap-8 font-label text-[0.65rem] sm:text-[0.75rem] uppercase tracking-wider sm:tracking-widest flex-wrap justify-center">

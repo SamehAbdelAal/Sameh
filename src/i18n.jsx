@@ -12,7 +12,7 @@ const translations = {
 
     // Hero
     heroSubtitle: 'Full-Stack Odoo Developer & AI Specialist',
-    heroName: 'Sameh AbdelAal',
+    heroName: 'Sameh Abdel Aal',
     heroLine1: 'Engineering',
     heroHighlight: 'Human',
     heroLine2: 'Impact',
@@ -94,7 +94,7 @@ const translations = {
     chatConnect: 'Connect:',
 
     // Splash
-    splashName: 'Sameh AbdelAal',
+    splashName: 'Sameh Abdel Aal',
     splashRole: 'Full-Stack Odoo Developer',
     splashDetail: 'Website Odoo & Backend Odoo',
     splashWelcome: 'Welcome...',

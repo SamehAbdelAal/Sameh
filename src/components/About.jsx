@@ -9,7 +9,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 sm:gap-24 items-center">
         <div className="fade-left relative group">
           <div className="absolute -inset-4 bg-linear-to-br from-primary/20 to-tertiary/20 rounded-2xl blur-2xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-          <img alt="Sameh AbdelAal" className="relative rounded-2xl grayscale hover:grayscale-0 transition-all duration-700 border border-outline-variant/20 shadow-2xl w-full object-cover aspect-[3/4]" src={samehImg} />
+          <img alt="Sameh Abdel Aal" className="relative rounded-2xl grayscale hover:grayscale-0 transition-all duration-700 border border-outline-variant/20 shadow-2xl w-full object-cover aspect-[3/4]" src={samehImg} />
           <div className="absolute -bottom-8 -right-8 p-8 bg-surface-container-highest border border-outline-variant/30 rounded-2xl hidden lg:block pulse-glow">
             <p className="font-headline text-4xl font-bold text-tertiary">2+</p>
             <p className="font-label text-xs text-on-surface-variant uppercase tracking-widest">{t('yearsExp')}</p>
