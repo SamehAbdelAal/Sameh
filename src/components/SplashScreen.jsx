@@ -7,8 +7,15 @@ export default function SplashScreen({ onFinish }) {
   const { t } = useI18n()
 
   useEffect(() => {
-    const timer = setTimeout(onFinish, 3000)
-    return () => clearTimeout(timer)
+    if (document.readyState === 'complete') {
+      setTimeout(onFinish, 800)
+    } else {
+      const done = () => setTimeout(onFinish, 500)
+      window.addEventListener('load', done, { once: true })
+      // Fallback: max 2s
+      const fallback = setTimeout(onFinish, 2000)
+      return () => { clearTimeout(fallback); window.removeEventListener('load', done) }
+    }
   }, [onFinish])
 
   const lines = [
@@ -24,8 +31,8 @@ export default function SplashScreen({ onFinish }) {
       transition={{ duration: 0.6, ease: 'easeInOut' }}
     >
       <motion.img src={logo} alt="Sameh Logo" className="h-20 md:h-28 w-auto mb-10"
-        initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }} />
+
+transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }} />
 
       <div className="text-center space-y-3">
         {lines.map((line, i) => (

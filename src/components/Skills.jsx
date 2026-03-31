@@ -4,9 +4,9 @@ export default function Skills() {
   const { t } = useI18n()
 
   const SKILLS = [
-    { icon: 'database', title: t('erpTitle'), color: 'primary', desc: t('erpDesc'), tags: ['Python', 'OWL', 'QWeb', 'XML', 'PostgreSQL', 'Odoo.sh'] },
-    { icon: 'devices', title: t('webTitle'), color: 'secondary', desc: t('webDesc'), tags: ['React Native', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind'] },
-    { icon: 'settings_input_component', title: t('devopsTitle'), color: 'tertiary', desc: t('devopsDesc'), tags: ['Docker', 'Git', 'n8n', 'CI/CD', 'Server Deploy'] },
+    { icon: 'database', title: t('erpTitle'), color: 'primary', desc: t('erpDesc'), tags: ['Python', 'OWL JS', 'QWeb Template', 'XML', 'PostgreSQL', 'Odoo Backend', 'Odoo.sh'] },
+    { icon: 'devices', title: t('webTitle'), color: 'primary', desc: t('webDesc'), tags: ['Theme Snippets', 'jQuery', 'JavaScript', 'HTML', 'SCSS', 'Tailwind'] },
+    { icon: 'settings_input_component', title: t('devopsTitle'), color: 'primary', desc: t('devopsDesc'), tags: ['Docker', 'Git', 'n8n', 'Claude AI', 'CI/CD', 'Server Deploy'] },
   ]
 
   return (

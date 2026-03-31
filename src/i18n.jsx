@@ -56,7 +56,7 @@ const translations = {
     webTitle: 'Modern Frontend',
     webDesc: 'Seamless interfaces built with OWL, JavaScript, and custom QWeb. High-conversion Odoo websites and e-commerce platforms that look nothing like "default Odoo."',
     devopsTitle: 'AI & Automation',
-    devopsDesc: 'Intelligent workflows powered by Claude AI and n8n. From automated data pipelines to smart business rules — I make your Odoo think for itself.',
+    devopsDesc: 'Intelligent workflows powered by Claude AI, n8n, and modern DevOps. From automated data pipelines to smart business rules — I make your Odoo think for itself.',
 
     // Projects
     portfolio: 'Portfolio',
@@ -154,7 +154,7 @@ const translations = {
     webTitle: 'واجهات حديثة',
     webDesc: 'واجهات سلسة بـ OWL وJavaScript وQWeb. مواقع Odoo عالية التحويل ومنصات تجارة إلكترونية مش شبه "Odoo الافتراضي" خالص.',
     devopsTitle: 'ذكاء اصطناعي وأتمتة',
-    devopsDesc: 'سير عمل ذكي بـ Claude AI و n8n. من خطوط بيانات آلية لقواعد عمل ذكية — بخلي Odoo بتاعك يفكر لوحده.',
+    devopsDesc: 'سير عمل ذكي بـ Claude AI و n8n وأدوات DevOps حديثة. من خطوط بيانات آلية لقواعد عمل ذكية — بخلي Odoo بتاعك يفكر لوحده.',
 
     // Projects
     portfolio: 'معرض الأعمال',
