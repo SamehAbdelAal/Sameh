@@ -71,11 +71,7 @@ FEATURED PROJECTS (with live links)
    Full-stack Odoo website — custom snippets, reusable OWL components, interactive jQuery UI, deployed on Odoo.sh.
    Tech: Odoo, OWL, jQuery, Snippets, Website Odoo, QWeb, Odoo.sh
 
-5. Taqat Qatar — https://www.taqat.qa/
-   Full-stack Odoo website for a Qatari company — custom snippets, OWL components, jQuery features, deployed on Odoo.sh.
-   Tech: Odoo, OWL, jQuery, Snippets, Python, Odoo.sh
-
-6. Emdad Express — https://www.emdadexpress.com/
+5. Emdad Express — https://www.emdadexpress.com/
    Humanitarian relief supplier platform — custom Odoo e-commerce with product catalog, services showcase, and contact management.
    Tech: Odoo, Website Odoo, OWL JS, QWeb, Snippets, Python
 

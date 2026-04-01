@@ -8,7 +8,6 @@ import imgRelief from '../assets/relife.webp'
 import imgTaqatProp from '../assets/taqatprop.webp'
 import imgEdamah from '../assets/edamah.webp'
 import imgPearlPixels from '../assets/pearlpixsels.webp'
-import imgTaqatQatar from '../assets/taqatQatar.webp'
 import imgEmdad from '../assets/emdad.webp'
 import imgSilkway from '../assets/silkway.webp'
 import imgTatpack from '../assets/tatpack.webp'
@@ -37,12 +36,6 @@ const PROJECTS = [
     description: 'Full-stack Odoo website — custom snippets, reusable OWL components, interactive jQuery UI, deployed on Odoo.sh.',
     tech: ['Odoo', 'OWL', 'jQuery', 'Snippets', 'Website Odoo', 'Odoo.sh'],
     demo: 'https://www.pearlpixels.com/ar', image: imgPearlPixels,
-  },
-  {
-    id: 5, title: 'Taqat Qatar',
-    description: 'Full-stack Odoo website for a Qatari company — custom snippets, OWL components, jQuery features, deployed on Odoo.sh.',
-    tech: ['Odoo', 'OWL', 'jQuery', 'Snippets', 'Python', 'Odoo.sh'],
-    demo: 'https://www.taqat.qa/', image: imgTaqatQatar,
   },
   {
     id: 6, title: 'Emdad Express',
