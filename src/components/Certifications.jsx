@@ -17,6 +17,22 @@ const CERTS = [
     verifyUrl: 'https://verify.skilljar.com/c/isqjyopz5qr4',
     color: 'from-[#7a9abb] to-[#5a7a9b]',
   },
+  {
+    title: 'Building with the Claude API',
+    issuer: 'Anthropic',
+    date: '2026',
+    certNo: 'psaeo8w5ijpu',
+    verifyUrl: 'https://verify.skilljar.com/c/psaeo8w5ijpu',
+    color: 'from-[#b08968] to-[#8a6748]',
+  },
+  {
+    title: 'Introduction to Model Context Protocol',
+    issuer: 'Anthropic',
+    date: '2026',
+    certNo: 'qoakc3yu3r7u',
+    verifyUrl: 'https://verify.skilljar.com/c/qoakc3yu3r7u',
+    color: 'from-[#9b8bb4] to-[#7b6b94]',
+  },
 ]
 
 export default function Certifications() {

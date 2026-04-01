@@ -95,6 +95,14 @@ CERTIFICATIONS
    Certificate ID: isqjyopz5qr4
    Verify: https://verify.skilljar.com/c/isqjyopz5qr4
 
+3. Building with the Claude API — Anthropic (2026)
+   Certificate ID: psaeo8w5ijpu
+   Verify: https://verify.skilljar.com/c/psaeo8w5ijpu
+
+4. Introduction to Model Context Protocol — Anthropic (2026)
+   Certificate ID: qoakc3yu3r7u
+   Verify: https://verify.skilljar.com/c/qoakc3yu3r7u
+
 ═══════════════════════════════════════
 CONTACT & SOCIAL LINKS
 ═══════════════════════════════════════
