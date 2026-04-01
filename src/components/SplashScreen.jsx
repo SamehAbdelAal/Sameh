@@ -31,6 +31,7 @@ export default function SplashScreen({ onFinish }) {
       transition={{ duration: 0.6, ease: 'easeInOut' }}
     >
       <motion.img src={logo} alt="Sameh Logo" className="h-20 md:h-28 w-auto mb-10"
+        style={{ filter: 'invert(1) sepia(1) saturate(2) hue-rotate(190deg) brightness(1.2)' }}
 
 transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }} />
 

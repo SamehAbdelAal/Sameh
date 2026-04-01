@@ -23,7 +23,7 @@ export default function Navbar({ dark, toggleTheme }) {
     <>
       <nav className="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl flex justify-between items-center px-4 sm:px-8 py-3 sm:py-4">
         <a href="#hero" className="flex items-center">
-          <img src={logo} alt="Sameh Logo" className="h-8 sm:h-10 w-auto" />
+          <img src={logo} alt="Sameh Logo" className="h-8 sm:h-10 w-auto" style={{ filter: dark ? 'invert(1) sepia(1) saturate(2) hue-rotate(190deg) brightness(1.2)' : 'none' }} />
         </a>
 
         <div className="hidden md:flex items-center gap-8 font-label text-[0.75rem] uppercase tracking-widest">
