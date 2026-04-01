@@ -290,7 +290,6 @@ export default function Chatbot() {
               <div className="flex items-center gap-3">
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="font-headline font-bold text-white text-sm">Sameh AI Assistant</span>
-                {genAI && <span className="text-[0.6rem] text-white/30 ml-1">Gemini</span>}
               </div>
               <button onClick={() => setIsOpen(false)} className="text-white/50 hover:text-white transition-colors"><X className="w-5 h-5" /></button>
             </div>
