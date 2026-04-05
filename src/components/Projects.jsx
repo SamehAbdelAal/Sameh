@@ -442,7 +442,7 @@ export default function Projects() {
           className="font-headline text-3xl sm:text-5xl md:text-6xl font-bold text-on-surface mb-4"
         >
           {t('selectedProjects')}{' '}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-secondary">{t('projectsWord')}</span>
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-tertiary">{t('projectsWord')}</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 15 }} animate={headerInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }}

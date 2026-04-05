@@ -14,10 +14,11 @@ const translations = {
     heroSubtitle: 'Full-Stack Odoo Developer & AI Specialist',
     heroName: 'Sameh Abdel Aal',
     heroLine1: 'I Build',
-    heroHighlight: 'Odoo',
-    heroLine2: 'Solutions.',
-    heroDesc: 'I build scalable Odoo ecosystems. I craft seamless interfaces. I wire intelligent automation. Where enterprise logic meets AI-driven performance — that\'s where I operate.',
-    viewWork: 'Explore My Work',
+    heroHighlight: 'Odoo Solutions',
+    heroLine2: '',
+    heroDesc: 'From custom modules to full ERP implementation — I turn complex business needs into production-ready Odoo systems that scale, automate, and deliver results.',
+    heroAvailable: 'Available for projects',
+    viewWork: 'See My Work',
     downloadCv: 'Download CV',
 
     // About
@@ -113,9 +114,10 @@ const translations = {
     heroName: 'سامح عبدالعال',
     heroLine1: 'أبني',
     heroHighlight: 'حلول Odoo',
-    heroLine2: 'متكاملة.',
-    heroDesc: 'أبني أنظمة Odoo قابلة للتوسع. أصمم واجهات سلسة. أربط الأتمتة الذكية. حيث يلتقي منطق المؤسسات بأداء الذكاء الاصطناعي — هنا أعمل.',
-    viewWork: 'استكشف أعمالي',
+    heroLine2: '',
+    heroDesc: 'من الموديولات المخصصة لتطبيق ERP كامل — أحوّل احتياجات الأعمال المعقدة لأنظمة Odoo جاهزة للإنتاج تتوسع، تُأتمت، وتحقق نتائج.',
+    heroAvailable: 'متاح للمشاريع',
+    viewWork: 'شوف أعمالي',
     downloadCv: 'تحميل السيرة الذاتية',
 
     // About

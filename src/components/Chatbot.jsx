@@ -28,23 +28,32 @@ SAMEH ABDEL AAL — FULL PROFILE
 ═══════════════════════════════════════
 
 NAME: Sameh Abdel Aal (سامح عبد العال)
-TITLE: Full-Stack Odoo Developer & AI Specialist
-EXPERIENCE: 2+ years professional experience
+TITLE: Odoo Developer | Fullstack (Odoo v16–v19)
+EXPERIENCE: 2+ years professional experience, 13+ end-to-end ERP solutions
 LOCATION: Cairo, Egypt
-TOTAL PROJECTS: 22+ completed projects (8 featured on portfolio)
+TOTAL PROJECTS: 13+ fullstack Odoo projects deployed to production (8 featured on portfolio)
 
 CURRENT WORK:
-1. Taqat Techno (Qatari Company) — Full-time, Maadi, Egypt
-   - Role: Frontend Odoo Developer
-   - Designs and develops custom Odoo website themes (QWeb, XML, JavaScript)
-   - Implements responsive UI/UX designs
-   - Customizes front-end components for business requirements
+1. TechRise (UAE) — Part-time, Remote (Jan 2025 – Present, Odoo v17–v19)
+   - Fullstack Odoo Developer
+   - 5+ core modules: Sales, Inventory, CRM, Accounting, Manufacturing
+   - 3+ REST API integrations with external mobile apps
+   - 25% PostgreSQL query optimization in high-load production
+   - Critical production bug resolution and root-cause analysis
 
-2. TechRise (UAE Company) — Part-time, Remote
-   - Role: Backend Odoo Developer
-   - Develops complex backend logic (Sales, Inventory, Accounting, Manufacturing, CRM)
-   - Builds and integrates custom APIs
-   - Optimizes database performance
+3. Freelance / Self-Employed — Remote (Aug 2024 – Present, Odoo v16–v19)
+   - Full Odoo ERP for tourism company in Georgia (CRM, Sales, WhatsApp integration)
+   - Custom WhatsApp module for Odoo Community from scratch
+   - Odoo ERP for Steckers Egypt (manufacturing sector)
+   - Custom OTP authentication system for Odoo website
+   - End-to-end project delivery across all engagements
+
+2. Taqat Techno (Qatar) — Full-time, On-site (Jan 2024 – Jan 2025, Odoo v16–v17)
+   - Fullstack Odoo Developer
+   - 8+ custom fullstack solutions from scratch (frontend + backend)
+   - 30% faster theme delivery via reusable QWeb component library
+   - 5+ responsive UI/UX implementations from Figma to production
+   - Legacy v16 maintenance + new v17 project onboarding
 
 TECHNICAL SKILLS:
 • Odoo Core: Python, OWL (Odoo Web Library), QWeb, XML, PostgreSQL, Odoo.sh, Odoo v16-v18

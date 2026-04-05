@@ -1,110 +1,145 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useI18n } from '../i18n'
-import { Database, Monitor, Cloud, Code2 } from 'lucide-react'
+
+const SKILLS = [
+  {
+    title: 'Odoo Backend',
+    icon: 'database',
+    items: [
+      { name: 'Python & ORM', level: 90 },
+      { name: 'Custom Modules', level: 95 },
+      { name: 'PostgreSQL', level: 85 },
+      { name: 'REST API', level: 80 },
+    ],
+  },
+  {
+    title: 'Web Frontend',
+    icon: 'code',
+    items: [
+      { name: 'OWL JS & QWeb', level: 92 },
+      { name: 'Themes & Snippets', level: 95 },
+      { name: 'JavaScript', level: 88 },
+      { name: 'React', level: 70 },
+    ],
+  },
+  {
+    title: 'DevOps',
+    icon: 'cloud',
+    items: [
+      { name: 'Docker & Nginx', level: 85 },
+      { name: 'Odoo.sh', level: 90 },
+      { name: 'Data Migration', level: 80 },
+      { name: 'Odoo Upgrade', level: 75 },
+    ],
+  },
+  {
+    title: 'AI & Automation',
+    icon: 'smart_toy',
+    items: [
+      { name: 'Claude AI', level: 85 },
+      { name: 'n8n', level: 80 },
+      { name: 'API Integration', level: 88 },
+      { name: 'MCP', level: 78 },
+    ],
+  },
+]
+
+function SkillCard({ skill, index, inView, isLast }) {
+  const isTertiary = index % 2 !== 0
+
+  return (
+    <div className="relative flex gap-6 md:gap-10">
+      {/* Timeline line + dot */}
+      <div className="flex flex-col items-center shrink-0">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={inView ? { scale: 1 } : {}}
+          transition={{ delay: 0.2 + index * 0.15, type: 'spring', stiffness: 300 }}
+          className={`relative z-10 w-4 h-4 rounded-full ${isTertiary ? 'bg-tertiary' : 'bg-primary'} border-4 border-surface-container-low mt-2`}
+        />
+        {!isLast && (
+          <motion.div
+            initial={{ height: 0 }}
+            animate={inView ? { height: '100%' } : {}}
+            transition={{ delay: 0.3 + index * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className={`w-0.5 flex-1 ${isTertiary ? 'bg-linear-to-b from-tertiary/40 to-tertiary/10' : 'bg-linear-to-b from-primary/40 to-primary/10'}`}
+          />
+        )}
+      </div>
+
+      {/* Card */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ delay: 0.25 + index * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="flex-1 pb-8"
+      >
+        <div className="p-5 sm:p-6 rounded-2xl bg-surface-container border border-outline-variant/10">
+          {/* Title */}
+          <div className="flex items-center gap-3 mb-5">
+            <div className={`w-9 h-9 rounded-lg ${isTertiary ? 'bg-tertiary/10' : 'bg-primary/10'} flex items-center justify-center`}>
+              <span className={`material-symbols-outlined ${isTertiary ? 'text-tertiary' : 'text-primary'} text-lg`}>{skill.icon}</span>
+            </div>
+            <h3 className="font-headline text-lg font-bold text-on-surface">{skill.title}</h3>
+          </div>
+
+          {/* Bars */}
+          <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3.5">
+            {skill.items.map((item, j) => (
+              <div key={j}>
+                <div className="flex justify-between mb-1.5">
+                  <span className="text-sm text-on-surface-variant">{item.name}</span>
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={inView ? { opacity: 1 } : {}}
+                    transition={{ delay: 0.5 + index * 0.1 + j * 0.05 }}
+                    className="text-xs text-on-surface-variant/40"
+                  >
+                    {item.level}%
+                  </motion.span>
+                </div>
+                <div className="h-1.5 rounded-full bg-outline-variant/10 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={inView ? { width: `${item.level}%` } : {}}
+                    transition={{ delay: 0.3 + index * 0.1 + j * 0.05, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    className={`h-full rounded-full ${isTertiary ? 'bg-tertiary/60' : 'bg-primary/60'}`}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
 
 export default function Skills() {
   const { t } = useI18n()
-  const [ref, inView] = useInView({ threshold: 0.15, triggerOnce: true })
-
-  const SKILLS = [
-    {
-      icon: Database,
-      title: 'Odoo Backend',
-      desc: 'Custom module development, backend logic that scales — Sales, Inventory, Accounting, Manufacturing, CRM. I re-engineer Odoo for your business.',
-      tags: ['Python', 'PostgreSQL', 'OWL JS', 'QWeb Template', 'XML', 'Custom Modules', 'Odoo v16–v18'],
-    },
-    {
-      icon: Code2,
-      title: 'Web Frontend',
-      desc: 'High-performance Odoo websites and modern web apps — custom themes, reusable components, and pixel-perfect responsive interfaces.',
-      tags: ['Odoo Snippets', 'OWL JS', 'jQuery', 'QWeb', 'React', 'React Native', 'SCSS', 'Tailwind', 'HTML', 'JavaScript'],
-    },
-    {
-      icon: Cloud,
-      title: 'DevOps & Server',
-      desc: 'Full server setup, deployment, data migration, and Odoo upgrades. Production-ready infrastructure from day one.',
-      tags: ['Docker', 'Odoo.sh', 'Nginx', 'PostgreSQL', 'Data Migration', 'Odoo Upgrade', 'Git', 'CI/CD', 'Linux'],
-    },
-    {
-      icon: Monitor,
-      title: 'AI & Automation',
-      desc: 'Intelligent workflows and AI-powered automation. Smart business rules that make your Odoo ecosystem think for itself.',
-      tags: ['Claude AI', 'n8n', 'API Integration', 'Workflow Automation', 'MCP'],
-    },
-  ]
+  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
 
   return (
-    <section id="skills" className="relative py-20 sm:py-32 px-4 sm:px-6 bg-surface-container-low overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-primary/3 blur-[150px] rounded-full" />
-      </div>
-
-      <div ref={ref} className="relative z-10 max-w-7xl mx-auto">
+    <section id="skills" className="py-20 sm:py-32 px-4 sm:px-6 bg-surface-container-low">
+      <div ref={ref} className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 sm:mb-20 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
-          >
-            <p className="font-label text-primary tracking-widest uppercase mb-4 text-sm">{t('capabilities')}</p>
-            <h2 className="font-headline text-3xl sm:text-5xl md:text-6xl font-bold text-on-surface">
-              {t('technicalArsenal')} <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-primary/60">{t('arsenal')}</span>.
-            </h2>
-          </motion.div>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="max-w-md text-on-surface-variant text-sm sm:text-base"
-          >
-            {t('skillsDesc')}
-          </motion.p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-14 sm:mb-20"
+        >
+          <p className="font-label text-primary tracking-widest uppercase mb-4 text-sm">{t('capabilities')}</p>
+          <h2 className="font-headline text-3xl sm:text-5xl font-bold text-on-surface">
+            {t('technicalArsenal')} <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-tertiary">{t('arsenal')}</span>.
+          </h2>
+        </motion.div>
 
-        {/* Cards grid - 2x2 */}
-        <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
-          {SKILLS.map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.15 + i * 0.1 }}
-              className="group relative p-6 sm:p-8 rounded-2xl bg-surface-container border border-outline-variant/10 hover:border-primary/25 transition-all duration-500 overflow-hidden"
-            >
-              {/* Hover glow */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-              {/* Icon + Title row */}
-              <div className="flex items-center gap-4 mb-5 relative">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/15 group-hover:scale-110 transition-all duration-300">
-                  <s.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="font-headline text-lg sm:text-xl font-bold text-on-surface tracking-tight">{s.title}</h3>
-              </div>
-
-              {/* Description */}
-              <p className="text-on-surface-variant text-xs sm:text-sm leading-relaxed mb-6 relative">{s.desc}</p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5 relative">
-                {s.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2.5 py-1 text-[10px] sm:text-xs font-medium rounded-lg bg-surface-container-highest/80 text-primary/80 border border-outline-variant/10 hover:border-primary/30 hover:text-primary transition-colors duration-200"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Corner number */}
-              <span className="absolute top-5 right-6 font-headline text-4xl font-black text-on-surface/3">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-            </motion.div>
+        {/* Timeline */}
+        <div className="ml-2 sm:ml-4">
+          {SKILLS.map((skill, i) => (
+            <SkillCard key={i} skill={skill} index={i} inView={inView} isLast={i === SKILLS.length - 1} />
           ))}
         </div>
       </div>

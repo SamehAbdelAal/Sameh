@@ -51,7 +51,7 @@ transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }} />
 
       <motion.div className="w-48 h-0.5 bg-white/10 rounded-full overflow-hidden mt-10"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-        <motion.div className="h-full bg-linear-to-r from-primary to-secondary rounded-full"
+        <motion.div className="h-full bg-linear-to-r from-primary to-tertiary rounded-full"
           initial={{ width: '0%' }} animate={{ width: '100%' }}
           transition={{ duration: 2.5, delay: 0.3, ease: 'easeInOut' }} />
       </motion.div>

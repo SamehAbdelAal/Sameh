@@ -53,7 +53,7 @@ export default function Contact() {
               <textarea name="message" required className="w-full bg-transparent border-0 border-b border-outline-variant/50 focus:border-primary focus:outline-none text-on-surface px-0 py-3 transition-all resize-none" placeholder={t('messagePlaceholder')} rows="4"></textarea>
             </div>
             <button disabled={sending}
-              className={`w-full py-4 sm:py-5 font-black text-base sm:text-xl rounded-xl cyber-glow hover:scale-[1.02] transition-all uppercase tracking-wider sm:tracking-widest ${sent ? 'bg-emerald-500 text-white' : 'bg-linear-to-r from-primary to-primary-container text-on-primary'}`}
+              className={`w-full py-4 sm:py-5 font-black text-base sm:text-xl rounded-xl cyber-glow hover:scale-[1.02] transition-all uppercase tracking-wider sm:tracking-widest ${sent ? 'bg-tertiary text-black' : 'bg-linear-to-r from-primary to-primary-container text-on-primary'}`}
               type="submit">
               {sending ? t('sending') : sent ? t('sentSuccess') : t('sendMessage')}
             </button>
