@@ -58,7 +58,7 @@ function TimelineCard({ exp, index, inView }) {
         <motion.div
           initial={{ scale: 0 }}
           animate={inView ? { scale: 1 } : {}}
-          transition={{ delay: 0.2 + index * 0.15, type: 'spring', stiffness: 300 }}
+          transition={{ delay: 0.05 + index * 0.06, duration: 0.3, ease: 'easeOut' }}
           className="relative z-10 w-4 h-4 rounded-full bg-primary border-4 border-surface mt-2"
         >
           {/* Pulse on first (current) */}
@@ -67,22 +67,17 @@ function TimelineCard({ exp, index, inView }) {
           )}
         </motion.div>
 
-        {/* Line */}
+        {/* Line — static (animating height causes layout thrash on mobile) */}
         {!isLast && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={inView ? { height: '100%' } : {}}
-            transition={{ delay: 0.3 + index * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="w-0.5 bg-linear-to-b from-primary/40 to-primary/10 flex-1"
-          />
+          <div className="w-0.5 bg-linear-to-b from-primary/40 to-primary/10 flex-1" />
         )}
       </div>
 
       {/* Card */}
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ delay: 0.25 + index * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0, y: 15 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.1 + index * 0.06, duration: 0.4, ease: 'easeOut' }}
         className="flex-1 pb-10"
       >
         <div className="p-5 sm:p-6 md:p-8 rounded-2xl bg-surface-container border border-outline-variant/10 hover:border-primary/20 transition-all group">

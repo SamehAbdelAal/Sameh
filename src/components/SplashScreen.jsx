@@ -7,21 +7,15 @@ export default function SplashScreen({ onFinish }) {
   const { t } = useI18n()
 
   useEffect(() => {
-    if (document.readyState === 'complete') {
-      setTimeout(onFinish, 800)
-    } else {
-      const done = () => setTimeout(onFinish, 500)
-      window.addEventListener('load', done, { once: true })
-      // Fallback: max 2s
-      const fallback = setTimeout(onFinish, 2000)
-      return () => { clearTimeout(fallback); window.removeEventListener('load', done) }
-    }
+    // Fixed short duration — don't block on window.load (images/fonts stall it on mobile)
+    const t = setTimeout(onFinish, 1100)
+    return () => clearTimeout(t)
   }, [onFinish])
 
   const lines = [
-    { text: t('splashName'), delay: 0.3 },
-    { text: t('splashRole'), delay: 0.8 },
-    { text: t('splashDetail'), delay: 1.3 },
+    { text: t('splashName'), delay: 0.1 },
+    { text: t('splashRole'), delay: 0.25 },
+    { text: t('splashDetail'), delay: 0.4 },
   ]
 
   return (
@@ -53,7 +47,7 @@ transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }} />
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
         <motion.div className="h-full bg-linear-to-r from-primary to-tertiary rounded-full"
           initial={{ width: '0%' }} animate={{ width: '100%' }}
-          transition={{ duration: 2.5, delay: 0.3, ease: 'easeInOut' }} />
+          transition={{ duration: 1, delay: 0.1, ease: 'easeInOut' }} />
       </motion.div>
     </motion.div>
   )

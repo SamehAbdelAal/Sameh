@@ -7,6 +7,7 @@ const translations = {
     about: 'About',
     skills: 'Stack',
     projects: 'Projects',
+    certifications: 'Certs',
     contact: 'Contact',
     available: 'Available',
 
@@ -106,6 +107,7 @@ const translations = {
     about: 'عنّي',
     skills: 'المهارات',
     projects: 'المشاريع',
+    certifications: 'الشهادات',
     contact: 'تواصل',
     available: 'متاح',
 

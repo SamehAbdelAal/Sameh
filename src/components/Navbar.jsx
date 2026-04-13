@@ -17,6 +17,7 @@ export default function Navbar({ dark, toggleTheme }) {
     { label: t('about'), href: '#about' },
     { label: t('skills'), href: '#skills' },
     { label: t('projects'), href: '#projects' },
+    { label: t('certifications'), href: '#certifications' },
   ]
 
   return (

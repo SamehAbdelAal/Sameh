@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { Database, Code2, Cloud, Bot } from 'lucide-react'
 import { useI18n } from '../i18n'
 
 const SKILLS = [
   {
     title: 'Odoo Backend',
-    icon: 'database',
+    Icon: Database,
     items: [
       { name: 'Python & ORM', level: 90 },
       { name: 'Custom Modules', level: 95 },
@@ -15,7 +16,7 @@ const SKILLS = [
   },
   {
     title: 'Web Frontend',
-    icon: 'code',
+    Icon: Code2,
     items: [
       { name: 'OWL JS & QWeb', level: 92 },
       { name: 'Themes & Snippets', level: 95 },
@@ -25,7 +26,7 @@ const SKILLS = [
   },
   {
     title: 'DevOps',
-    icon: 'cloud',
+    Icon: Cloud,
     items: [
       { name: 'Docker & Nginx', level: 85 },
       { name: 'Odoo.sh', level: 90 },
@@ -35,7 +36,7 @@ const SKILLS = [
   },
   {
     title: 'AI & Automation',
-    icon: 'smart_toy',
+    Icon: Bot,
     items: [
       { name: 'Claude AI', level: 85 },
       { name: 'n8n', level: 80 },
@@ -47,6 +48,7 @@ const SKILLS = [
 
 function SkillCard({ skill, index, inView, isLast }) {
   const isTertiary = index % 2 !== 0
+  const Icon = skill.Icon
 
   return (
     <div className="relative flex gap-6 md:gap-10">
@@ -55,31 +57,26 @@ function SkillCard({ skill, index, inView, isLast }) {
         <motion.div
           initial={{ scale: 0 }}
           animate={inView ? { scale: 1 } : {}}
-          transition={{ delay: 0.2 + index * 0.15, type: 'spring', stiffness: 300 }}
+          transition={{ delay: 0.05 + index * 0.06, duration: 0.3, ease: 'easeOut' }}
           className={`relative z-10 w-4 h-4 rounded-full ${isTertiary ? 'bg-tertiary' : 'bg-primary'} border-4 border-surface-container-low mt-2`}
         />
         {!isLast && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={inView ? { height: '100%' } : {}}
-            transition={{ delay: 0.3 + index * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className={`w-0.5 flex-1 ${isTertiary ? 'bg-linear-to-b from-tertiary/40 to-tertiary/10' : 'bg-linear-to-b from-primary/40 to-primary/10'}`}
-          />
+          <div className={`w-0.5 flex-1 ${isTertiary ? 'bg-linear-to-b from-tertiary/40 to-tertiary/10' : 'bg-linear-to-b from-primary/40 to-primary/10'}`} />
         )}
       </div>
 
       {/* Card */}
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={inView ? { opacity: 1, x: 0 } : {}}
-        transition={{ delay: 0.25 + index * 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0, y: 15 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.1 + index * 0.06, duration: 0.4, ease: 'easeOut' }}
         className="flex-1 pb-8"
       >
         <div className="p-5 sm:p-6 rounded-2xl bg-surface-container border border-outline-variant/10">
           {/* Title */}
           <div className="flex items-center gap-3 mb-5">
             <div className={`w-9 h-9 rounded-lg ${isTertiary ? 'bg-tertiary/10' : 'bg-primary/10'} flex items-center justify-center`}>
-              <span className={`material-symbols-outlined ${isTertiary ? 'text-tertiary' : 'text-primary'} text-lg`}>{skill.icon}</span>
+              <Icon className={`w-4.5 h-4.5 ${isTertiary ? 'text-tertiary' : 'text-primary'}`} strokeWidth={2} />
             </div>
             <h3 className="font-headline text-lg font-bold text-on-surface">{skill.title}</h3>
           </div>
@@ -90,20 +87,13 @@ function SkillCard({ skill, index, inView, isLast }) {
               <div key={j}>
                 <div className="flex justify-between mb-1.5">
                   <span className="text-sm text-on-surface-variant">{item.name}</span>
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={inView ? { opacity: 1 } : {}}
-                    transition={{ delay: 0.5 + index * 0.1 + j * 0.05 }}
-                    className="text-xs text-on-surface-variant/40"
-                  >
-                    {item.level}%
-                  </motion.span>
+                  <span className="text-xs text-on-surface-variant/40">{item.level}%</span>
                 </div>
                 <div className="h-1.5 rounded-full bg-outline-variant/10 overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={inView ? { width: `${item.level}%` } : {}}
-                    transition={{ delay: 0.3 + index * 0.1 + j * 0.05, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ delay: 0.15 + index * 0.05, duration: 0.5, ease: 'easeOut' }}
                     className={`h-full rounded-full ${isTertiary ? 'bg-tertiary/60' : 'bg-primary/60'}`}
                   />
                 </div>

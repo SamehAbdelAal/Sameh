@@ -4,12 +4,45 @@ import { ArrowRight, Download, ChevronDown } from 'lucide-react'
 import { useI18n } from '../i18n'
 import { useState, useEffect } from 'react'
 
+/* ─── Brand Icons (inline SVG — no web font, tiny, crisp) ─── */
+const BrandIcon = ({ name, className = 'w-4 h-4' }) => {
+  const icons = {
+    github: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+        <path d="M12 .5C5.73.5.67 5.57.67 11.85c0 5.02 3.24 9.27 7.74 10.77.57.1.78-.25.78-.55 0-.27-.01-.98-.02-1.93-3.15.68-3.82-1.52-3.82-1.52-.51-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.74 2.66 1.23 3.31.94.1-.74.4-1.24.72-1.52-2.52-.29-5.17-1.26-5.17-5.62 0-1.24.44-2.25 1.17-3.05-.12-.29-.51-1.45.11-3.03 0 0 .96-.31 3.14 1.17a10.9 10.9 0 0 1 5.72 0c2.18-1.48 3.14-1.17 3.14-1.17.62 1.58.23 2.74.11 3.03.73.8 1.17 1.81 1.17 3.05 0 4.37-2.66 5.33-5.19 5.61.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.79.55 4.5-1.5 7.73-5.75 7.73-10.77C23.33 5.57 18.27.5 12 .5Z"/>
+      </svg>
+    ),
+    linkedin: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/>
+      </svg>
+    ),
+    facebook: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+        <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07Z"/>
+      </svg>
+    ),
+    mail: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+        <rect x="2" y="4" width="20" height="16" rx="2"/>
+        <path d="m22 7-10 5L2 7"/>
+      </svg>
+    ),
+    whatsapp: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+        <path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.12-.27-.2-.57-.35ZM12.04 22h-.01a9.93 9.93 0 0 1-5.06-1.38l-.36-.22-3.76.98 1-3.67-.23-.38a9.89 9.89 0 0 1-1.52-5.28c0-5.47 4.46-9.92 9.94-9.92 2.65 0 5.15 1.03 7.02 2.91a9.84 9.84 0 0 1 2.91 7.03C21.97 17.56 17.52 22 12.04 22Zm8.45-18.38A11.81 11.81 0 0 0 12.04 0C5.46 0 .11 5.34.11 11.91c0 2.1.55 4.15 1.6 5.96L0 24l6.3-1.65a11.93 11.93 0 0 0 5.73 1.45h.01c6.58 0 11.93-5.34 11.93-11.91 0-3.18-1.24-6.17-3.49-8.42Z"/>
+      </svg>
+    ),
+  }
+  return icons[name] || null
+}
+
 const SOCIALS = [
-  { icon: 'code', href: 'https://github.com', label: 'GitHub' },
-  { icon: 'person_add', href: 'https://www.linkedin.com/in/sameh-abdel-aal-25509628b', label: 'LinkedIn' },
-  { icon: 'group', href: 'https://www.facebook.com/sameh.abdel.aal.761559', label: 'Facebook' },
+  { icon: 'github', href: 'https://github.com', label: 'GitHub' },
+  { icon: 'linkedin', href: 'https://www.linkedin.com/in/sameh-abdel-aal-25509628b', label: 'LinkedIn' },
+  { icon: 'facebook', href: 'https://www.facebook.com/sameh.abdel.aal.761559', label: 'Facebook' },
   { icon: 'mail', href: 'mailto:samehashraf9472@gmail.com', label: 'Email' },
-  { icon: 'chat', href: 'https://wa.me/201017729427', label: 'WhatsApp' },
+  { icon: 'whatsapp', href: 'https://wa.me/201017729427', label: 'WhatsApp' },
 ]
 
 /* ─── Typewriter Terminal ─── */
@@ -43,9 +76,17 @@ function useTypewriter(lines, speed = 30, lineDelay = 500, startDelay = 0) {
   return { displayed, typing, done: currentLine >= lines.length }
 }
 
-/* ─── Floating Particles ─── */
+/* ─── Floating Particles (reduced on mobile for perf) ─── */
 function Particles() {
-  const dots = Array.from({ length: 25 }, (_, i) => ({
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    // Skip entirely if user prefers reduced motion
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
+    // Few on mobile, more on desktop
+    setCount(window.innerWidth < 768 ? 8 : 20)
+  }, [])
+
+  const dots = Array.from({ length: count }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
@@ -88,7 +129,7 @@ function Terminal({ inView, lang }) {
     { text: '> status: ready ✓', color: 'text-tertiary' },
   ]
 
-  const { displayed, typing, done } = useTypewriter(lines, 22, 350, inView ? 600 : 99999)
+  const { displayed, typing, done } = useTypewriter(lines, 14, 180, inView ? 300 : 99999)
 
   return (
     <div className="w-full max-w-md">
@@ -225,7 +266,7 @@ export default function Hero() {
                   className="w-9 h-9 rounded-lg border border-outline-variant/10 bg-surface-container/30 flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/25 transition-all"
                   aria-label={s.label}
                 >
-                  <span className="material-symbols-outlined text-lg">{s.icon}</span>
+                  <BrandIcon name={s.icon} className="w-4 h-4" />
                 </motion.a>
               ))}
             </motion.div>
