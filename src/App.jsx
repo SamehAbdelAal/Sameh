@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import './App.css'
 import { I18nProvider } from './i18n'
 
@@ -70,6 +71,7 @@ export default function App() {
         <Footer />
         <Chatbot />
       </div>
+      <SpeedInsights />
     </I18nProvider>
   )
 }
